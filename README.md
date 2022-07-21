@@ -46,7 +46,7 @@ To build the installer, install `Maximilian's Automation Utility`. The build pro
 
 `VIEWHEIC` uses a class named HeifImage to wrap `libheic`. If you are interested in how libheic is used, take a look at the init(), decode() and term() methods.
 
-``C++
+```C++
 class HeifImage
 {
 public:
