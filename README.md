@@ -37,7 +37,7 @@ Prerequisites:
 
 The installer is available from [here](https://github.com/mtanabe/). It installs `libheic` (version 1.12.0) and associated dll dependecies as well. Installation requires admin priviledges as it performs a per-machine install.
 
-To build the installer, install `Maximilian's Automation Utility`. The build process requires Utility's `MaxsUtilLib.VersionInfo` automation object. 
+To build the installer, install [`Maximilian's Automation Utility`](https://github.com/mtanabe-sj/maximilians-automation-utility/tree/main/installer/out). The build process requires Utility's `MaxsUtilLib.VersionInfo` automation object. 
 
 
 ## Introduction to the Design and Implementation
