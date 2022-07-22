@@ -35,7 +35,7 @@ Prerequisites:
 * Visual Studio 2017 or 2019. The VS solution and project files were generated using VS 2017. They can be imported by VS 2019.
 * Windows SDK 10.0.17763.0. More recent SDKs should work, too, although no verification has been made.
 
-The installer is available from [here](https://github.com/mtanabe/). It installs `libheic` (version 1.12.0) and associated dll dependecies as well. Installation requires admin priviledges as it performs a per-machine install.
+The installer is available from [here](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/installer/out/heicviewer_setup.exe). It installs `libheic` (version 1.12.0) and associated dll dependecies as well. Installation requires admin priviledges as it performs a per-machine install.
 
 To build the installer, install [`Maximilian's Automation Utility`](https://github.com/mtanabe-sj/maximilians-automation-utility/tree/main/installer/out). The build process requires Utility's `MaxsUtilLib.VersionInfo` automation object. 
 
