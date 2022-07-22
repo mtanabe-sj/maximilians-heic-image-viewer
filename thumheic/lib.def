@@ -1,0 +1,13 @@
+; lib.def : Declares the module parameters for the DLL.
+
+LIBRARY	"thumheic"
+; DESCRIPTION  'MT HEIC Thumbnail Provider'
+
+EXPORTS
+	; Explicit exports can go here
+	DllCanUnloadNow PRIVATE
+	DllGetClassObject PRIVATE
+	DllRegisterServer PRIVATE
+	DllGetVersion PRIVATE
+	DllUnregisterServer PRIVATE
+
