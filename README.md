@@ -93,7 +93,7 @@ See MainDlg::OnCommand() on how the viewer responds to the zoom, rotate, print a
 
 The thumbnail provider is more interesting in terms of component architecture, as it must deal with Windows Explorer as well as `libheic`. The components of the provider are shown below. The arrows indicate main flows of instructions and image data. The provider and the bound libheif and other libraries reside in a DLLHOST process, a child process created by Explorer on selection of a .heic image file by a user. Our provider and Explorer use Win32 GDI to manage the decoded DIB bitmap and other graphical resources. Explorer passes an IStream on the .heic file to the thumbnail server via the IInitializeWithStream interface. The thumbnail provider uses the HeifReader class to read the .heic image data through the IStream interface. LIBHEIF decodes the image data from the heif_reader interface published by HeifReader of the thumbnail provider. The decoded data is passed to the thumbnail provider which in turn generates a DI bitmap based on the color data by calling GDI CreateDIBSection. A handle to the generated bitmap is passed back to Explorer which caches the bitmap and completes thumbnail display for the .heic file.
 
-![alt Thumbnail provider components](https://github.com/mtanabe/maximilians-heic-image-viewer/blob/main/thumbnail-provider-design.png)
+![alt Thumbnail provider components](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/doc/thumbnail%20provider%20design.png)
 
 The provider implements IThumbnailProvider in the class,
 
