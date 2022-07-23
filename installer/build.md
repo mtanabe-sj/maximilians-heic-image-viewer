@@ -40,11 +40,12 @@ msbuild    VCDIR     %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Profession
 Follow these steps to build the setup program:
 
 - Open installer\build.bat in Notepad. Locate the following SET statement shown below. Correct the path setting if your project configuration differs.
-`@set ProjectSource=<directory>\heicviewer
+> @set ProjectSource=<directory>\heicviewer
 ProjectSource is the base folder of the product's source tree.
 
 - Update heicviewer\viewheic\appver.h with the latest product info and build number. Skip this step if there is no change.
-- Run installer\CleanAndBuildAll.bat. It builds the setup. It is not necessary to use an admin account to run the batch process.
+
+  - Run installer\CleanAndBuildAll.bat. It builds the setup. It is not necessary to use an admin account to run the batch process.
 
 The build process uses the 'installer\work' folder to hold temporary data files. The process outputs the built installer to 'installer\out'.
 
@@ -81,5 +82,4 @@ set APPTOSIGN=<path\>testapp.exe
 
 Make sure that the two environment variables `CERT_STORE` and `SIGNING_CERT` are defined before running CleanAndBuild.bat or build.bat.
 
-
-*** END OF BUILD.MD ***
+July 2022, mtanabe
