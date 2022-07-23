@@ -1,6 +1,6 @@
 # Maximilian's HEIC Image Viewer
 
-Maximilian's HEIC image viewer is a Windows Shell Extension handler written in C++. It lets Windows users preview, display and print .heic image files. The viewer uses the GNU `libheic` library to achieve image decompression.
+Maximilian's HEIC image viewer is a Windows Explorer add-on written in C++. It lets Windows users preview, display and print .heic image files. The viewer uses the GNU `libheic` library to achieve image decompression.
 
 On Windows 10 and earlier, users may not be able to preview image files with extension .heic due to a missing codec in `WIC`. Users could purchase the codec from Windows Store for a small license fee. Or, they could install this freeware.
 
@@ -19,7 +19,7 @@ Visual Studio project `viewheic` builds the image viewer. The viewer application
 
 The thumbnail provider is a Shell Extension handler implementing the `IThumbnailProvider` interface of the Shell. It is an in-proc COM server registered with the Shell subsystem. So, the library's DllRegisterServer performs both standard COM and Shell-specific registrations. If the source image comes with a thumbnail image itself, the provider tries to use that. Otherwise, it scales the source image to fit the requested size.
 
-Both `viewheic` and `thumheic` depend on `libheif` for image decompression.
+Both `viewheic` and `thumheic` depend on [libheif](https://github.com/strukturag/libheif) for image decompression.
 
 Setup runs a test on the WIC of the system for availability of a HEIF codec. It stops the installation if the test result is positive, meaning there is no need for an external codec. Setup comes with both a x64 and x86 msi installers. It starts an appropriate msi appropriate for the system it is run.
 
