@@ -24,6 +24,7 @@ Build a self-extracting setup program that bundles both the x64 and x86 msi's an
 
 The build process uses the Microsoft tools shown below. Make sure they exist.
 
+```
 Tools      Env var   File location
 =========  ========  ====================================
 msidb      PSDKBIN   %ProgramFiles(x86)%\Windows Kits\10\bin\10.0.17763.0\x86
@@ -32,6 +33,7 @@ uuidgen
 signtool
 ---------  --------  ------------------------------------
 msbuild    VCDIR     %ProgramFiles(x86)%\Microsoft Visual Studio\2017\Professional\MSBuild\15.0
+```
 
 ## BUILD PROCESS
 
@@ -42,7 +44,6 @@ Follow these steps to build the setup program:
 ProjectSource is the base folder of the product's source tree.
 
 - Update heicviewer\viewheic\appver.h with the latest product info and build number. Skip this step if there is no change.
-
 - Run installer\CleanAndBuildAll.bat. It builds the setup. It is not necessary to use an admin account to run the batch process.
 
 The build process uses the 'installer\work' folder to hold temporary data files. The process outputs the built installer to 'installer\out'.
