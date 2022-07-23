@@ -6,6 +6,8 @@ rem Platforms: x86 or x64
 rem Options: specify INSTALLSRC to enable the bundling of the source code with the installer.
 rem 32-bit MSI Output: %ProjectSource%\installer\work\%ProjectName%86.msi
 rem 64-bit MSI Output: %ProjectSource%\installer\work\%ProjectName%64.msi
+rem
+rem Make sure %SIGNING_CERT% and %CERT_STORE% are defined and are backed by a real code signing cert.
 
 @set ProjectSource=c:\src\projects\cpp\shell\heicviewer
 @set ProjectName=heicviewer
@@ -14,14 +16,7 @@ rem 64-bit MSI Output: %ProjectSource%\installer\work\%ProjectName%64.msi
 @set ProductName=Maximilian's HEIC Image Viewer
 @set ProductDescription=This setup program installs shell integration software. It lets you preview, display and print HEIC image files from within the Windows Explorer. You need administrator privileges to install.
 
-@if not defined PSDKBIN set PSDKBIN=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin
-@if not defined ProgramFiles(x86) goto initializeCompilerPaths86
-@if not defined VCDIR set VCDIR=%ProgramFiles(x86)%\Microsoft Visual Studio 9.0\VC
-@if not defined VCSDKBIN set VCSDKBIN=%ProgramFiles(x86)%\\Microsoft Visual Studio 9.0\SDK\v3.5\Bin
-goto startBuild
-:initializeCompilerPaths86
-@if not defined VCDIR set VCDIR=%ProgramFiles%\Microsoft Visual Studio 9.0\VC
-@if not defined VCSDKBIN set VCSDKBIN=%ProgramFiles%\Microsoft Visual Studio 9.0\SDK\v3.5\Bin
+@if not defined PSDKBIN set PSDKBIN=%ProgramFiles(x86)%\Windows Kits\10\bin\10.0.17763.0\x86
 
 :startBuild
 cd %ProjectSource%
@@ -30,9 +25,9 @@ md %ProjectSource%\installer\out
 
 set MTPLATFORM=x64
 if "%1"=="x64" (
-"%PSDKBIN%\signtool.exe" sign /v /s "TestCerts" /n "MTanabeDev" /t http://timestamp.comodoca.com/authenticode  .\x64\release\thumheic.dll
+"%PSDKBIN%\signtool.exe" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode  .\x64\release\thumheic.dll
 @if errorlevel 1 goto exitBatch
-"%PSDKBIN%\signtool.exe" sign /v /s "TestCerts" /n "MTanabeDev" /t http://timestamp.comodoca.com/authenticode  .\x64\release\viewheic.exe
+"%PSDKBIN%\signtool.exe" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode  .\x64\release\viewheic.exe
 @if errorlevel 1 goto exitBatch
 goto runMakeMsi
 )
@@ -40,9 +35,9 @@ if not "%1"=="x86" (
 @echo *** BUILD ABORTED. PLATFORM TYPE IS NOT SPECIFIED ***
 goto exitBatch
 )
-"%PSDKBIN%\signtool.exe" sign /v /s "TestCerts" /n "MTanabeDev" /t http://timestamp.comodoca.com/authenticode  .\release\thumheic.dll
+"%PSDKBIN%\signtool.exe" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode  .\release\thumheic.dll
 @if errorlevel 1 goto exitBatch
-"%PSDKBIN%\signtool.exe" sign /v /s "TestCerts" /n "MTanabeDev" /t http://timestamp.comodoca.com/authenticode  .\release\viewheic.exe
+"%PSDKBIN%\signtool.exe" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode  .\release\viewheic.exe
 @if errorlevel 1 goto exitBatch
 set MTPLATFORM=x86
 
@@ -80,7 +75,7 @@ cd %ProjectSource%\installer\work
 DEL programs.cab
 
 @echo _____________________________________________ SignMsi
-"%PSDKBIN%\signtool.exe" sign /v /s "TestCerts" /n "MTanabeDev" /t http://timestamp.comodoca.com/authenticode %ProjectName%.msi
+"%PSDKBIN%\signtool.exe" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode %ProjectName%.msi
 @if errorlevel 1 goto exitBatch
 
 @echo _____________________________________________ MsiSummary
