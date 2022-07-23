@@ -77,8 +77,7 @@ set APPTOSIGN=<path\>testapp.exe
 "%PSDKBIN%\signtool" sign /v /s "%CERT_STORE%" /n "%SIGNING_CERT%" /t http://timestamp.comodoca.com/authenticode "%APPTOSIGN%"
 ```
 
-- Define Cert Variables
+- Define Cert Variables. Make sure that the two environment variables `CERT_STORE` and `SIGNING_CERT` are defined before running CleanAndBuild.bat or build.bat.
 
-Make sure that the two environment variables `CERT_STORE` and `SIGNING_CERT` are defined before running CleanAndBuild.bat or build.bat.
 
 July 2022, mtanabe
