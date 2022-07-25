@@ -1,6 +1,6 @@
 # Maximilian's HEIC Image Viewer
 
-Maximilian's HEIC image viewer is a Windows Explorer add-on written in C++. It lets Windows users preview, display and print .heic image files. The viewer uses the GNU `libheic` library to achieve image decompression.
+Maximilian's HEIC image viewer is a Windows Explorer add-on written in C++. It lets Windows users preview, display and print .heic image files. The viewer uses the GNU `libheif` library to achieve image decompression.
 
 On Windows 10 and earlier, users may not be able to preview image files with extension .heic due to a missing codec in `WIC`. Users could purchase the codec from Windows Store for a small license fee. Or, they could install this freeware.
 
@@ -40,7 +40,7 @@ VS Solutions:
 * heicviewer.sln - builds the add-on components, `viewheic` and `thumheic`, which are VC projects.
 * setup.sln - builds the setup program, another VC project.
 
-The installer is available from [here](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/installer/out/heicviewer_setup.exe). It installs `libheic` (version 1.12.0) and associated dll dependecies as well. Installation requires admin priviledges as it performs a per-machine install.
+The installer is available from [here](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/installer/out/heicviewer_setup.exe). It installs `libheif` (version 1.12.0) and associated dll dependecies as well. Installation requires admin priviledges as it performs a per-machine install.
 
 To build the installer, install [`Maximilian's Automation Utility`](https://github.com/mtanabe-sj/maximilians-automation-utility/tree/main/installer/out). The build process requires Utility's `MaxsUtilLib.VersionInfo` automation object. 
 
@@ -49,7 +49,7 @@ To build the installer, install [`Maximilian's Automation Utility`](https://gith
 
 ### VIEWHEIC Viewer Application
 
-`VIEWHEIC` uses a class named HeifImage to wrap `libheic`. If you are interested in how libheic is used, take a look at the init(), decode() and term() methods.
+`VIEWHEIC` uses a class named HeifImage to wrap `libheif`. If you are interested in how libheif is used, take a look at the init(), decode() and term() methods.
 
 ```C++
 class HeifImage
@@ -78,7 +78,7 @@ The image is decoded through a string of calls made by HeifImage to LIBHEIF. The
 3)	Obtain a primary image handle from heif_context_get_primary_image_handle.
 4)	Query the image dimensions by calling heif_image_handle_get_width and heif_image_handle_get_height.
 
-The decode() method does the most processor intensive work of HEVC decoding. Actually, LIBHEIC uses the decoder library, LIBDE256, to achieve HEVC decoding.
+The decode() method does the most processor intensive work of HEVC decoding. Actually, LIBHEIF uses the decoder library, LIBDE256, to achieve HEVC decoding.
 
 1)	Decode the image by calling heif_decode_image on the image handle. RGB colorspace is selected. This call may not return immediately if the image resolution is high.
 2)	Scale the image by calling heif_image_scale_image if the image is too large to fit the screen.
@@ -96,7 +96,7 @@ See MainDlg::OnCommand() on how the viewer responds to the zoom, rotate, print a
 
 ### THUMHEIC Thumbnail Provider
 
-The thumbnail provider is more interesting in terms of component architecture, as it must deal with Windows Explorer as well as `libheic`. The components of the provider are shown below. The arrows indicate main flows of instructions and image data. The provider and the bound libheif and other libraries reside in a DLLHOST process, a child process created by Explorer on selection of a .heic image file by a user. Our provider and Explorer use Win32 GDI to manage the decoded DIB bitmap and other graphical resources. Explorer passes an IStream on the .heic file to the thumbnail server via the IInitializeWithStream interface. The thumbnail provider uses the HeifReader class to read the .heic image data through the IStream interface. LIBHEIF decodes the image data from the heif_reader interface published by HeifReader of the thumbnail provider. The decoded data is passed to the thumbnail provider which in turn generates a DI bitmap based on the color data by calling GDI CreateDIBSection. A handle to the generated bitmap is passed back to Explorer which caches the bitmap and completes thumbnail display for the .heic file.
+The thumbnail provider is more interesting in terms of component architecture, as it must deal with Windows Explorer as well as `libheif`. The components of the provider are shown below. The arrows indicate main flows of instructions and image data. The provider and the bound libheif and other libraries reside in a DLLHOST process, a child process created by Explorer on selection of a .heic image file by a user. Our provider and Explorer use Win32 GDI to manage the decoded DIB bitmap and other graphical resources. Explorer passes an IStream on the .heic file to the thumbnail server via the IInitializeWithStream interface. The thumbnail provider uses the HeifReader class to read the .heic image data through the IStream interface. LIBHEIF decodes the image data from the heif_reader interface published by HeifReader of the thumbnail provider. The decoded data is passed to the thumbnail provider which in turn generates a DI bitmap based on the color data by calling GDI CreateDIBSection. A handle to the generated bitmap is passed back to Explorer which caches the bitmap and completes thumbnail display for the .heic file.
 
 ![alt Thumbnail provider components](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/doc/thumbnail%20provider%20design.png)
 
@@ -127,7 +127,7 @@ The class implements a COM object, servicing two interfaces, IInitializeWithStre
 * Convert it to color data of the 32-bpp DIB_RGB_COLORS format of Win32 GDI.
 * Return the HBITMAP handle of the generated RGB bitmap.
 
-The HEVC image decoding is similar to what HeifImage implements. It's essentially a delegation to `libheic`. As the diagram indicates, what's unique to the thumbnail provider is the need to translate IStream requests from Windows Explorer to calls to the `heif_reader` interface of `libheic`.
+The HEVC image decoding is similar to what HeifImage implements. It's essentially a delegation to `libheif`. As the diagram indicates, what's unique to the thumbnail provider is the need to translate IStream requests from Windows Explorer to calls to the `heif_reader` interface of `libheif`.
 
 ```C++
 class HeifReader
@@ -183,7 +183,7 @@ Bug reports and enhancement requests are welcome.
 
 ## License
 
-Copyright (c) mtanabe, All rights reserved.
+Copyright (c) Makoto Tanabe, All rights reserved.
 
 Maximilian's HEIC Image Viewer is distributed under the terms of the MIT License.
-The libheic and associated libraries are distributed under the terms of the GNU license.
+The libheif and associated libraries are distributed under the terms of the GNU license.
