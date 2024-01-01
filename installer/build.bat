@@ -13,8 +13,8 @@ rem Make sure %SIGNING_CERT% and %CERT_STORE% are defined and are backed by a re
 @set ProjectName=heicviewer
 @set ProjectCompany=mtanabe
 @set ProductCode={84B09E9E-D6AF-480C-A93C-885F4C854008}
-@set ProductName=Maximilian's HEIC Image Viewer
-@set ProductDescription=This setup program installs shell integration software. It lets you preview, display and print HEIC image files from within the Windows Explorer. You need administrator privileges to install.
+@set ProductName=Maximilian's HEIC Image Viewer Add-on
+@set ProductDescription=The add-on lets you preview, display and print HEIC image files from within the Windows Explorer. You need administrator privileges to install.
 
 @if not defined PSDKBIN set PSDKBIN=%ProgramFiles(x86)%\Windows Kits\10\bin\10.0.17763.0\x86
 
