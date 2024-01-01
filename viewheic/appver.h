@@ -29,12 +29,12 @@
 #define APP_VERMAJOR 1
 #define APP_VERMINOR 0
 #define APP_REVISION 1
-#define APP_BUILD 1
+#define APP_BUILD 2
 
-#define FILEVER			1,0,1,1
-#define PRODUCTVER		1,0,1,1
-#define STRFILEVER		"1,0,1,1\0"
-#define STRPRODUCTVER	"1, 0, 1, 1\0"
+#define FILEVER			1,0,1,2
+#define PRODUCTVER		1,0,1,2
+#define STRFILEVER		"1,0,1,2\0"
+#define STRPRODUCTVER	"1, 0, 1, 2\0"
 
 #define STRPRODUCTNAME	"Maximilian's HEIC Image Viewer\0"
 #define STRPRODUCTDESC	"Viewer for HEIC image files\0"
