@@ -28,18 +28,18 @@
 
 #define APP_VERMAJOR 1
 #define APP_VERMINOR 0
-#define APP_REVISION 0
+#define APP_REVISION 1
 #define APP_BUILD 1
 
-#define FILEVER			1,0,0,1
-#define PRODUCTVER		1,0,0,1
-#define STRFILEVER		"1,0,0,1\0"
-#define STRPRODUCTVER	"1, 0, 0, 1\0"
+#define FILEVER			1,0,1,1
+#define PRODUCTVER		1,0,1,1
+#define STRFILEVER		"1,0,1,1\0"
+#define STRPRODUCTVER	"1, 0, 1, 1\0"
 
 #define STRPRODUCTNAME	"Maximilian's HEIC Image Viewer\0"
 #define STRPRODUCTDESC	"Viewer for HEIC image files\0"
 #define STRCOMPANYNAME			"mtanabe\0"
-#define STRLEGALCOPYRIGHT		"Copyright © 2022\0"
+#define STRLEGALCOPYRIGHT		"Copyright © 2022-2024\0"
 #define STRLEGALTRADEMARK		"Maximilian's\0"
 #define STRCOMMENTS         "Requires hief.dll from libheif.\0"
 #define STRPRIVATEBUILD		"\0"
