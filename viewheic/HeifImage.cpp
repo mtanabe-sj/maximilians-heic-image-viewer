@@ -52,7 +52,10 @@ bool HeifImage::init(HWND hwnd, LPCWSTR imagePath, ULONG flags)
 {
 	_hwnd = hwnd;
 	_ctrlFlags = flags;
-	WideCharToMultiByte(CP_ACP, 0, imagePath, -1, _imagePath, sizeof(_imagePath), NULL, NULL);
+	// convert the filename in unicode to utf-8 to preserve non-english characters.
+	// used to use CP_ACP which corrupted the path if it contained foreign characters
+	// and caused heif_context_read_from_file to fail.
+	WideCharToMultiByte(CP_UTF8, 0, imagePath, -1, _imagePath, sizeof(_imagePath), NULL, NULL);
 
 	_ctx = heif_context_alloc();
 

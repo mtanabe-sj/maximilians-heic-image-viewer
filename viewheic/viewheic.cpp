@@ -543,7 +543,10 @@ BOOL MainDlg::OnCommand(WPARAM wp_, LPARAM lp_)
 				PostMessage(_hdlg, WM_COMMAND, MAKEWPARAM(IDM_DECODE, 0), 1);
 			}
 			else
+			{
 				delete h;
+				EndDialog(_hdlg, IDABORT); // quit since the file could not be opened.
+			}
 		}
 		else if (lp_ == 1)
 		{
