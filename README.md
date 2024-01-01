@@ -23,7 +23,7 @@ Both `viewheic` and `thumheic` depend on [libheif](https://github.com/strukturag
 
 Setup runs a test on the WIC of the system for availability of a HEIF codec. It stops the installation if the test result is positive, meaning there is no need for an external codec. Setup comes with both a x64 and x86 msi installers. It starts an appropriate msi appropriate for the system it is run.
 
-The msi tool set consists of a template msi, a build staging batch process, and a script for generating msi tables and packaging the product files in the msi. Refer to [build.md](https://github.com/mtanabe/maximilians-heic-image-viewer/blob/main/installer/build.md) for info on how to build the product.
+The msi tool set consists of a template msi, a build staging batch process, and a script for generating msi tables and packaging the product files in the msi. Refer to [build.md](https://github.com/mtanabe-sj/maximilians-heic-image-viewer/blob/main/installer/build.md) for info on how to build the product.
 
 
 
